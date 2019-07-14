@@ -1,0 +1,151 @@
+[使用说明]
+1.安装vim-plug
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    git clone git@github.com:Wytheecxc/vim.git
+    mv vim/vimrc php_funclist.txt  ~/.vim/
+    打开vim,:PlugInstall即可。
+
+2.安装wmctrl(sudo apt-get install wmctrl) yum install -y wnctrl
+
+3.yum install -y  ctags随意
+
+4.安装php语法分析器phpcs
+    方式1
+    pear install PHP_CodeSniffer
+    方式2
+    composer global require "squizlabs/php_codesniffer=*"
+
+[快捷键说明]
+
+    定义快捷键的前缀,常用的操作映射到 Leader 操作
+    let mapleader = ","
+    定义快捷键到行首和行尾
+    nmap lh 0
+    nmap le $
+    光标 focus 左侧树形目录
+    nnoremap ll <c-w>h
+    光标 focus 文件显示窗口
+    nnoremap rr <c-w>l
+    使用 ,w 保存文件
+    nnoremap <Leader>w :wq<CR>
+    退出不保存
+    nnoremap <Leader>q :q!<CR>
+    使用 ,o 创建一个新文件
+    nnoremap <Leader>o :CtrlP<CR>
+    
+    粘贴不变形，不自动缩进
+    :set paste(快捷键自己定义)
+
+[element]
+   新建一个html文件后,输入html:5,然后按control+y,再按,即可生成:
+  #####基本规则:
+  1. E 代表HTML标签
+  2  E#id 代表标签E有id属性
+  3. E.class 代表E有class属性
+  4. E[attr=foo] 代表某个特定属性
+  5. E{info} 代表标签E包含的内容是info
+  6. E>N 代表N是E的子元素
+  7. E+N 代表N是E的同级元素
+  8. E^N 代表N是E的上级元素
+  
+  输入p.class#id， 生成：<p id="id" class="class"></p>
+  输入h1{foo}， 生成：<h1>foo</h1>
+  输入h1+h2, 生成： <h1></h1>
+　　　　　　　　　　 <h2></h2>
+  输入img^a, 生成： <img src="">
+　　　　　　　　　　 <a href="" alt=""></a>
+  输入h1>h2, 生成： <h1>
+　　　　　　　　　　　　　　<h2></h2>
+　　　　　　　　　 </h1>
+
+  输入div.item， 生成： <div class="item">
+　　　　　　　　　　 　 </div>
+  输入ul>li*3， 生成： <ul>
+　　　　　　　　　　　　　　　　<li></li>
+　　　　　　　　　　　　　　　　<li></li>
+　　　　　　　　　　　　　　　　<li></li>
+　　　　　　　　　　　 　</ul>
+  
+
+
+[MBF]  
+    map <F5> :MBEbp<CR>
+    map <F6> :MBEbn<CR>
+
+    
+
+[NERDTree]
+    F2 打开/关闭netreee5.i、s 分别是水平、垂直打开文件，就像vim命令的 :vs、:sp一样
+    gi、gs 水平、垂直打开文件，光标不动
+    p 快速定位到上层目录 P 快速定位到根目录
+    
+
+[tagbar]
+    F3进入tagbar 光标在tagbar内<CR>: 回车跳到定义位置
+    p: 跳到定义位置，但光标仍然在tagbar原位置
+    P:打开一个预览窗口显示标签内容，如果在标签处回车跳到vim编辑页面内定义处，则预览窗口关闭
+    <C-N>: 跳到下一个标签页的顶端
+    <C-P>:?跳到上一个（或当前）标签页的顶端
+    <Space>: 底行显示标签原型
+    + 展开标签内容, - 关闭标签内容
+    * 展开所有标签
+    = 折叠所有标签
+    o 在折叠与展开间切换，按o键，折叠标签，再按一次o，则展开标签，如此来回切换
+
+[nerdommenter注释]
+    如果多行注释，先ctrl+v进入visual模式，然后选中多行。
+    shift+v进入行选择，移动鼠标，可进行多行选  单行注释//
+    Ctrl+v进入区域选择模式，Ctrl+v取消    移动上行下jhkl多行注释
+    每行一个/**/
+    <leader>cc   加注释
+    <leader>cu   解开注释v
+    <leader>ca 切换注释的样式:/*....*/和//..的切换
+    leader>cy   先复制, 再注解(p可以进行黏贴)
+    <leader>cs  '性感的'注释(我很喜欢这个!)
+
+[ctrlp文件搜索]
+    打开ctrlp搜索
+    let g:ctrlp_map = '<leader>ff'
+
+[PHP函数提示]  ctrl+n
+
+[PHP命名空间]
+    autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+    autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+
+[代码缩进可视化]
+    快捷键 i 开/关缩进可视化
+    
+[UltiSnips +snigmate自定义tab代码补全模板]
+    func => tab  funName ctrl+b  下一个输入点   ctrl+z上一个输入点
+
+[vim surround]
+    vim-surround更改成对的符号异常方便，关于文本对象的内容可以看 结合'tpope/vim-repeat'//
+    重复一个插件的操作, 支持surround.vim, 通过 surround 操作之后的行为, .号重复
+
+    http://www.wklken.me/posts/2015/06/13/vim-plugin-surround-repeat.html
+
+    cs”‘ g光标所在位置的字符左右双引号变成单引号，向下移动光标按.重复上一次操作
+
+[全屏开关]
+    F11   全屏开关(启动vim自动进入全屏)
+
+[复制粘贴]
+    首先，可以在命令模式下输入v进入自由选取模式，选择需要剪切的文字后，按下d就可以进行剪切了。
+    其他命令模式下剪切命令：
+    yy：复制当前行
+    nyy：n表示大于1的数字，复制n行
+    yw：从光标处复制至一个单子/单词的末尾，包括空格
+    ye：从光标处复制至一个单子/单词的末尾，不包括空格
+    y$：从当前光标复制到行末
+    y0：从当前光标位置（不包括光标位置）复制之行首
+    y3l：从光标位置（包括光标位置）向右复制3个字符
+    y5G：将当前行（包括当前行）至第5行（不包括它）复制
+    y3B：从当前光标位置（不包括光标位置）反向复制3个单词
+
+[全选]
+    全选删除 dG
+    全选复制 ggyG
+
+[多行同时缩进]
+   V进入视图模式，选择多行，<与>
